@@ -2,7 +2,7 @@
 
 describe('Parametrized toster test', () => {
 
-    before(() => {
+    beforeEach(() => {
         cy.visit('https://sanitarskyi-ngx-admin.herokuapp.com/');
         cy.get('[src="assets/images/material-dark-theme.jpg"]').click();
         cy.get('[title="Modal & Overlays"]').click(); 
@@ -16,7 +16,7 @@ describe('Parametrized toster test', () => {
                 title: 'I\'m here',
                 content: 'Success toster',
                 type: 'success',
-                timeout: '5000'
+                
             },
 
             expectedResult:
@@ -39,7 +39,7 @@ describe('Parametrized toster test', () => {
                 title: 'Hi, Max!',
                 content: 'Info toster',
                 type: 'info',
-                timeout: '5000'
+                
             },
 
             expectedResult:
@@ -64,7 +64,7 @@ describe('Parametrized toster test', () => {
                 title: 'Hi, Taisia!',
                 content: 'Warning toster',
                 type: 'warning',
-                timeout: '5000'
+                
             },
 
             expectedResult:
@@ -89,7 +89,7 @@ describe('Parametrized toster test', () => {
                 title: 'Hi, friend!',
                 content: 'Danger toster',
                 type: 'danger',
-                timeout: '5000'
+                
             },
 
             expectedResult:
@@ -122,7 +122,7 @@ describe('Parametrized toster test', () => {
             cy.get('[ng-reflect-selected="primary"]').click();
             cy.contains(testData.type).click();
 
-            //cy.get('.size-medium.ng-valid.nb-transition.ng-dirty').invoke('text').then(parseFloat).should('be.an', '5000');;
+            cy.get('[ng-reflect-model="2000"]').invoke('text').then(parseFloat).should('be.an', 5000);
 
             cy.get('.mat-ripple.appearance-filled').eq(0).click()
             
@@ -131,12 +131,12 @@ describe('Parametrized toster test', () => {
             
             cy.get('.icon-container.ng-star-inserted').eq(2).end(expectedResult.icon);;
             
-            //cy.get('.title.subtitle').clear().type(expectedResult.title);
-            //cy.get('.message').clear().type(expectedResult.content);
+            cy.get('.subtitle').should('include.text', expectedResult.title);
+            cy.get('.message').should('have.text', expectedResult.content);
 
-            //cy.get('.cdk-overlay-pane')
-           // .should('have.css', 'background-color', 'rgb(96, 175, 32)')
-            //cy.contains(expectedResult.color);
+            cy.get('.ng-tns-c209-54.ng-trigger')
+           .should('have.css', 'background-color', 'rgb(96, 175, 32)')
+            cy.contains(expectedResult.color);
    
         });
          
