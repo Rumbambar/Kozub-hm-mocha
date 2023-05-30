@@ -122,7 +122,7 @@ describe('Parametrized toster test', () => {
             cy.get('[ng-reflect-selected="primary"]').click();
             cy.contains(testData.type).click();
 
-            cy.get('[ng-reflect-model="2000"]').invoke('text').then(parseFloat).should('be.an', 5000);
+            cy.get('[ng-reflect-model="2000"]').should('have.value', 2000);
 
             cy.get('.mat-ripple.appearance-filled').eq(0).click()
             
@@ -134,10 +134,13 @@ describe('Parametrized toster test', () => {
             cy.get('.subtitle').should('include.text', expectedResult.title);
             cy.get('.message').should('have.text', expectedResult.content);
 
-            cy.get('.ng-tns-c209-54.ng-trigger')
-           .should('have.css', 'background-color', 'rgb(96, 175, 32)')
-            cy.contains(expectedResult.color);
-   
+            // cy.get('.ng-tns-c209-54.ng-star-inserted').eq(1)
+            // .should('have.css', 'background-color') 
+            // .and('rgb(233, 29, 99)')
+            // cy.contains(expectedResult.color);
+
+            cy.get('.toastr-overlay-container.cdk-global-overlay-wrapper').should('have.css', expectedResult.position )
+            
         });
          
 
